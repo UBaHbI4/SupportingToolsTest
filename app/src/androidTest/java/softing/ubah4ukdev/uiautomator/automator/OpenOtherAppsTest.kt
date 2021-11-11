@@ -10,6 +10,7 @@ import androidx.test.uiautomator.UiSelector
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
+import softing.ubah4ukdev.uiautomator.TestConstants
 
 /**
  *   Project: UIAutomator
@@ -29,7 +30,8 @@ import org.junit.runner.RunWith
 @SdkSuppress(minSdkVersion = 18)
 class OpenOtherAppsTest {
 
-    private val uiDevice: UiDevice = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
+    private val uiDevice: UiDevice =
+        UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
 
     @Test
     fun test_OpenSettings() {
@@ -41,7 +43,10 @@ class OpenOtherAppsTest {
         //В нашем случае это примерно снизу экрана строго вверх. Steps указывает, в
         //какое количество шагов мы хотим осуществить смахивание: чем выше число,
         //тем медленнее будет осуществляться свайп
-        uiDevice.swipe(500, 1500, 500, 0, 5)
+        uiDevice.swipe(
+            TestConstants.SWIPE_START_X, TestConstants.SWIPE_START_Y,
+            TestConstants.SWIPE_END_X, TestConstants.SWIPE_END_Y, TestConstants.SWIPE_STEPS
+        )
 
         //Для других устройств список установленных приложений может открываться по другому.
         //Часто это иконка на главном экране под названием Apps.
@@ -67,14 +72,14 @@ class OpenOtherAppsTest {
             .getChildByText(
                 UiSelector()
                     .className(TextView::class.java.name),
-                "Настройки"
+                TestConstants.SETTINGS
             )
         //Открываем
         settingsApp.clickAndWaitForNewWindow()
 
         //Убеждаемся, что Настройки открыты
         val settingsValidation =
-            uiDevice.findObject(UiSelector().packageName("com.android.settings"))
+            uiDevice.findObject(UiSelector().packageName(TestConstants.SETTING_PACKAGE))
         Assert.assertTrue(settingsValidation.exists())
     }
 }
