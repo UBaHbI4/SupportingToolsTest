@@ -56,7 +56,7 @@ class MainActivityEspressoTest {
         } else {
             Espresso.onView(ViewMatchers.isRoot()).perform(delay())
             Espresso.onView(withId(R.id.totalCountTextView))
-                .check(ViewAssertions.matches(ViewMatchers.withText("Number of results: 2661")))
+                .check(ViewAssertions.matches(ViewMatchers.withText("Number of results: 2667")))
         }
     }
 
